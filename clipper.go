@@ -475,7 +475,7 @@ var horizontal = math.Inf(-1)
 const (
 	Skip       int     = -2
 	Unassigned int     = -1
-	tolerance  float64 = 1.0E-20
+	tolerance  float64 = 1.0e-20
 )
 
 type ClipperBase struct {
@@ -525,7 +525,7 @@ func (c *ClipperBase) PointIsVertex(pt *IntPoint, pp *OutPt) bool {
 //------------------------------------------------------------------------------
 
 func (c *ClipperBase) PointOnLineSegment(pt,
-linePt1, linePt2 *IntPoint, UseFullRange bool) bool {
+	linePt1, linePt2 *IntPoint, UseFullRange bool) bool {
 	if UseFullRange {
 		return ((pt.X == linePt1.X) && (pt.Y == linePt1.Y)) ||
 			((pt.X == linePt2.X) && (pt.Y == linePt2.Y)) ||
@@ -574,7 +574,7 @@ func (c *ClipperBase) SlopesEqual(e1, e2 *TEdge, UseFullRange bool) bool {
 //------------------------------------------------------------------------------
 
 func (c *ClipperBase) SlopesEqual3(pt1, pt2,
-pt3 *IntPoint, UseFullRange bool) bool {
+	pt3 *IntPoint, UseFullRange bool) bool {
 	if UseFullRange {
 		return Int128Mul(pt1.Y-pt2.Y, pt2.X-pt3.X).Cmp(
 			Int128Mul(pt1.X-pt2.X, pt2.Y-pt3.Y)) == 0
@@ -587,7 +587,7 @@ pt3 *IntPoint, UseFullRange bool) bool {
 //------------------------------------------------------------------------------
 
 func (c *ClipperBase) SlopesEqual4(pt1, pt2,
-pt3, pt4 *IntPoint, UseFullRange bool) bool {
+	pt3, pt4 *IntPoint, UseFullRange bool) bool {
 	if UseFullRange {
 		return Int128Mul(pt1.Y-pt2.Y, pt3.X-pt4.X).Cmp(
 			Int128Mul(pt1.X-pt2.X, pt3.Y-pt4.Y)) == 0
@@ -4122,7 +4122,7 @@ func (c *Clipper) DistanceFromLineSqrd(pt, ln1, ln2 *IntPoint) float64 {
 //---------------------------------------------------------------------------
 
 func (c *Clipper) SlopesNearCollinear(pt1,
-pt2, pt3 *IntPoint, distSqrd float64) bool {
+	pt2, pt3 *IntPoint, distSqrd float64) bool {
 	return c.DistanceFromLineSqrd(pt2, pt1, pt3) < distSqrd
 }
 
@@ -4746,7 +4746,7 @@ func (co *ClipperOffset) Execute(delta float64) (solution Paths) {
 //------------------------------------------------------------------------------
 
 func (co *ClipperOffset) Execute2(delta float64) (solution *PolyTree) {
-	solution.Clear()
+	solution = NewPolyTree()
 	co.FixOrientations()
 	co.DoOffset(delta)
 
